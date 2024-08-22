@@ -30,4 +30,4 @@ export const config = {
     '/dashboard/:path*',
     '/verfiy/:path*',
   ],
-}
+}      
