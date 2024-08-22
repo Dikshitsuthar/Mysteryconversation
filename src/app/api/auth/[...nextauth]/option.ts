@@ -1,4 +1,4 @@
-import { NextAuthOptions } from "next-auth"
+ import { NextAuthOptions } from "next-auth"
 // import $or from "mongoose";
 import CredentialsProvider from "next-auth/providers/credentials"
 import bcrypt from 'bcryptjs';
