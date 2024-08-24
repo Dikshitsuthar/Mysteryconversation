@@ -14,7 +14,7 @@ import { User } from 'next-auth';
 import { useSession } from 'next-auth/react';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { acceptMessageSchema } from '@/schemas/acceptMessageSchema';
+import { AcceptMessageSchema } from '@/schemas/acceptMessageSchema';
 
 function UserDashboard() {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -30,7 +30,7 @@ function UserDashboard() {
   const { data: session } = useSession();
 
   const form = useForm({
-    resolver: zodResolver(acceptMessageSchema),
+    resolver: zodResolver(AcceptMessageSchema),
   });
 
   const { register, watch, setValue } = form;
@@ -40,7 +40,7 @@ function UserDashboard() {
     setIsSwitchLoading(true);
     try {
       const response = await axios.get<ApiResponse>('/api/accept-messages');
-      setValue('acceptMessages', response.data.isAcceptingMessage);
+      setValue('acceptMessages', response.data.isAcceptingMessages);
     } catch (error) {
       const axiosError = error as AxiosError<ApiResponse>;
       toast({
@@ -141,9 +141,9 @@ function UserDashboard() {
         <h2 className="text-lg font-semibold mb-2">Copy Your Unique Link</h2>{' '}
         <div className="flex items-center">
           <input
-          aria-label="Profile URL"
+            title='Profile URL'
             type="text"
-            value={profileUrl}
+            value={profileUrl || " "}
             disabled
             className="input input-bordered w-full p-2 mr-2"
           />
